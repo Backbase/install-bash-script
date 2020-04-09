@@ -1,0 +1,20 @@
+---
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/cs_e?useSSL=false
+    username: root
+    password: backbase
+    driver-class-name: com.mysql.jdbc.Driver
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5Dialect
+contentservices:
+  filesystem:
+    importLocation: ${BACKBASE_HOME}/contentservices/imports
+    exportLocation: ${BACKBASE_HOME}/contentservices/exports
+    fileLocation: ${BACKBASE_HOME}/contentservices/file
+  cmis:
+    repository:
+      content:
+        fileLocation: ${BACKBASE_HOME}/contentservices/content

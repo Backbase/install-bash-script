@@ -1,0 +1,10 @@
+#
+# Configuration file only for development
+#
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/provisioning_e?useSSL=false
+    username: root
+    password: backbase
+    driver-class-name: com.mysql.jdbc.Driver

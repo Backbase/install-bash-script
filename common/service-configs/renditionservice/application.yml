@@ -1,0 +1,10 @@
+#
+# Configuration file only for development
+#
+
+renditionservice:
+  database:
+    url: jdbc:mysql://localhost:3306/rendition_e?useSSL=false
+    username: root
+    password: backbase
+    driver-class-name: com.mysql.jdbc.Driver

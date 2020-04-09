@@ -1,0 +1,11 @@
+#
+# Configuration file only for development
+#
+
+logging:
+  level:
+    com:
+      backbase:
+        cxp:
+          rendition: INFO
+          thumbnail: INFO

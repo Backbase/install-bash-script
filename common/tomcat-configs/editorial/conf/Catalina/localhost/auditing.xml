@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <!-- Default set of monitored resources -->
+    <Environment name="spring.config.additional-location"
+                 value="file:////tmp/opt/backbase/service-configs/auditing/application.yml"
+                 type="java.lang.String"
+                 override="true" />
+</Context>
+

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.backbase</groupId>
+    <artifactId>platform-bom</artifactId>
+    <version>1.11.8</version>
+    <packaging>pom</packaging>
+
+    <name>Backbase Platform BOM</name>
+    <description>Backbase Platform - "Bill of Materials"</description>
+    <url>https://stash.backbase.com/projects/PLAT/repos/platform-bom/browse</url>
+
+    <organization>
+        <name>Backbase B.V.</name>
+        <url>http://www.backbase.com</url>
+    </organization>
+    <issueManagement>
+        <system>Jira</system>
+        <url>http://jira.backbase.com</url>
+    </issueManagement>
+    
+
+    
+
+    <distributionManagement>
+        <repository>
+            <id>Backbase Artifact Builds Repository</id>
+            <name>artifacts.backbase.com-builds</name>
+            <url>https://artifacts.backbase.com/backbase-development-rc-releases</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <edge_service_version>1.13.0</edge_service_version>
+        <registry_service_version>1.9.0</registry_service_version>
+        <token_converter_service_version>1.2.20</token_converter_service_version>
+
+        <jwt_version>2.5.1</jwt_version>
+        <csrf_version>2.1.0</csrf_version>
+
+        <authentication_version>2.12.1</authentication_version>
+        <platform_starter_token_converter_version>1.4.23</platform_starter_token_converter_version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--==========-->
+            <!-- SERVICES -->
+            <!--==========-->
+            <dependency>
+                <groupId>com.backbase.infra</groupId>
+                <artifactId>gateway</artifactId>
+                <version>${edge_service_version}</version>
+                <type>war</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.backbase.infra</groupId>
+                <artifactId>gateway</artifactId>
+                <version>${edge_service_version}</version>
+                <type>jar</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.backbase.infra</groupId>
+                <artifactId>registry</artifactId>
+                <version>${registry_service_version}</version>
+                <type>war</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.backbase.infra</groupId>
+                <artifactId>registry</artifactId>
+                <version>${registry_service_version}</version>
+                <type>jar</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.backbase.identity</groupId>
+                <artifactId>bb-authentication-token-converter-service</artifactId>
+                <version>${token_converter_service_version}</version>
+                <type>war</type>
+            </dependency>
+
+            <dependency>
+                <groupId>com.backbase.identity</groupId>
+                <artifactId>bb-authentication-token-converter-service</artifactId>
+                <version>${token_converter_service_version}</version>
+                <type>jar</type>
+            </dependency>
+
+            <!-- ==========-->
+            <!-- LIBRARIES -->
+            <!-- ==========-->
+
+            <!-- SSO libraries -->
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>internal-jwt</artifactId>
+                <version>${jwt_version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>internal-jwt</artifactId>
+                <version>${jwt_version}</version>
+                <classifier>javadoc</classifier>
+            </dependency>
+
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>external-jwt</artifactId>
+                <version>${jwt_version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>external-jwt</artifactId>
+                <version>${jwt_version}</version>
+                <classifier>javadoc</classifier>
+            </dependency>
+
+           <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>jwt-core</artifactId>
+                <version>${jwt_version}</version>
+                <type>jar</type>
+            </dependency>
+           <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>jwt-core</artifactId>
+                <version>${jwt_version}</version>
+                <classifier>javadoc</classifier>
+            </dependency>
+
+            <!-- Authentication libraries -->
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>authentication-core</artifactId>
+                <version>${authentication_version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>authentication-core</artifactId>
+                <version>${authentication_version}</version>
+                <classifier>javadoc</classifier>
+            </dependency>
+
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>authentication-event</artifactId>
+                <version>${authentication_version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>authentication-event</artifactId>
+                <version>${authentication_version}</version>
+                <classifier>javadoc</classifier>
+            </dependency>
+
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>token-converter-core</artifactId>
+                <version>${authentication_version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>token-converter-core</artifactId>
+                <version>${authentication_version}</version>
+                <classifier>javadoc</classifier>
+            </dependency>
+
+           <!-- CSRF libraries -->
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>spring-security-csrf</artifactId>
+                <version>${csrf_version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>spring-security-csrf</artifactId>
+                <version>${csrf_version}</version>
+                <classifier>javadoc</classifier>
+            </dependency>
+
+            <!-- ========== -->
+            <!-- ARCHETYPES -->
+            <!-- ========== -->
+            <dependency>
+                <groupId>com.backbase.archetype</groupId>
+                <artifactId>auth-service-archetype</artifactId>
+                <version>${authentication_version}</version>
+                <type>jar</type>
+            </dependency>
+
+            <!-- ========== -->
+            <!-- SPRING BOOT STARTERS -->
+            <!-- ========== -->
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>authentication-external-jwt-service-spring-boot-starter-parent</artifactId>
+                <version>${authentication_version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>authentication-external-jwt-service-starter</artifactId>
+                <version>${authentication_version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>authentication-service-spring-boot-starter-parent</artifactId>
+                <version>${authentication_version}</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.buildingblocks</groupId>
+                <artifactId>authentication-service-starter</artifactId>
+                <version>${authentication_version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>com.backbase.identity</groupId>
+                <artifactId>platform-starter-token-converter</artifactId>
+                <version>${platform_starter_token_converter_version}</version>
+                <type>jar</type>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+<profiles>
+   <profile>
+      <id>default</id>
+      <activation>
+         <activeByDefault>true</activeByDefault>
+      </activation>
+      <build>
+         <plugins>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-dependency-plugin</artifactId>
+               <version>3.1.1</version>
+               <executions>
+                  <execution>
+                     <id>copy</id>
+                     <phase>package</phase>
+                     <goals>
+                        <goal>copy</goal>
+                     </goals>
+                     <configuration>
+                        <overWriteIfNewer>true</overWriteIfNewer>
+                        <artifactItems>
+                           <artifactItem>
+                              <groupId>com.backbase.infra</groupId>
+                              <artifactId>gateway</artifactId>
+                              <version>${edge_service_version}</version>
+                              <type>war</type>
+                              <destFileName>gateway.war</destFileName>
+                           </artifactItem>
+                           <artifactItem>
+                              <groupId>com.backbase.infra</groupId>
+                              <artifactId>registry</artifactId>
+                              <version>${registry_service_version}</version>
+                              <type>war</type>
+                              <destFileName>registry.war</destFileName>
+                           </artifactItem>
+                           <artifactItem>
+                              <groupId>com.backbase.identity</groupId>
+                              <artifactId>bb-authentication-token-converter-service</artifactId>
+                              <version>${token_converter_service_version}</version>
+                              <type>war</type>
+                              <destFileName>token-converter.war</destFileName>
+                           </artifactItem>
+                        </artifactItems>
+                     </configuration>
+                  </execution>
+               </executions>
+            </plugin>
+         </plugins>
+      </build>
+   </profile>
+  <profile>
+      <id>executable-jars</id>
+      <activation>
+         <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+         <plugins>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-dependency-plugin</artifactId>
+               <version>3.1.1</version>
+               <executions>
+                  <execution>
+                     <id>copy</id>
+                     <phase>package</phase>
+                     <goals>
+                        <goal>copy</goal>
+                     </goals>
+                     <configuration>
+                        <overWriteIfNewer>true</overWriteIfNewer>
+                        <artifactItems>
+                           <artifactItem>
+                              <groupId>com.backbase.infra</groupId>
+                              <artifactId>gateway</artifactId>
+                              <version>${edge_service_version}</version>
+                              <type>jar</type>
+                              <destFileName>gateway.jar</destFileName>
+                           </artifactItem>
+                           <artifactItem>
+                              <groupId>com.backbase.infra</groupId>
+                              <artifactId>registry</artifactId>
+                              <version>${registry_service_version}</version>
+                              <type>jar</type>
+                              <destFileName>registry.jar</destFileName>
+                           </artifactItem>
+                           <artifactItem>
+                              <groupId>com.backbase.identity</groupId>
+                              <artifactId>bb-authentication-token-converter-service</artifactId>
+                              <version>${token_converter_service_version}</version>
+                              <type>jar</type>
+                              <destFileName>token-converter.jar</destFileName>
+                           </artifactItem>
+                        </artifactItems>
+                     </configuration>
+                  </execution>
+               </executions>
+            </plugin>
+         </plugins>
+      </build>
+   </profile>
+</profiles>
+</project>

@@ -1,0 +1,8 @@
+gateway:
+  token:
+    converter:
+      # type: EXTERNAL
+      url: http://token-converter/token-converter/convert
+      load-balanced: true
+
+  
