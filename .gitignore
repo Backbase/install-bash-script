@@ -16,3 +16,8 @@
 data
 *.retry
 *.*~
+# exclude everything
+local-install/*
+
+# exception to the rule
+!local-install/.gitkeep
