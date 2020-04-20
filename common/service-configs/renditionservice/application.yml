@@ -2,8 +2,8 @@
 # Configuration file only for development
 #
 
-renditionservice:
-  database:
+spring:
+  datasource:
     url: jdbc:mysql://localhost:3306/rendition_e?useSSL=false
     username: root
     password: backbase

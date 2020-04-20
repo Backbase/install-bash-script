@@ -191,6 +191,7 @@ function installLocalCx6 {
   cp renditionservice.war ${CX6_TOMCAT_EDITORIAL}/webapps
   cp targeting.war ${CX6_TOMCAT_EDITORIAL}/webapps
   cp thumbnailservice.war ${CX6_TOMCAT_EDITORIAL}/webapps
+  cp space-controller-service.war ${CX6_TOMCAT_EDITORIAL}/webapps
 
   echo "Copying IPS Wars"
   cp authentication-dev-1.4.0.war ${CX6_TOMCAT_PLATFORM}/webapps/authentication.war
@@ -202,7 +203,6 @@ function installLocalCx6 {
   cp contentservices.war ${CX6_TOMCAT_PORTAL}/webapps
   cp portal.war ${CX6_TOMCAT_PORTAL}/webapps
   cp provisioning.war ${CX6_TOMCAT_PORTAL}/webapps
-  cp space-controller-service.war ${CX6_TOMCAT_PORTAL}/webapps
 
   createDatabases
 

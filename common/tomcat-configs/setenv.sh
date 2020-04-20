@@ -30,7 +30,7 @@ export SSO_JWT_EXTERNAL_EXPIRATION=36000
 export SSO_JWT_EXTERNAL_RENEW=144000
 export SSO_JWT_EXTERNAL_NOT_VALID_AFTER=57600
 
-#export LIQUIBASE_ENABLED="false"
+export SPRING_LIQUIBASE_ENABLED="false"
 
 export SPRING_APPLICATION_JSON='{"eureka.client.serviceUrl.defaultZone": "http://localhost:8080/registry/eureka/"}'
 
