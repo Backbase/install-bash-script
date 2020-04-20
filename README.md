@@ -109,6 +109,10 @@ with the format:
 If there's a new feature or functionality we want to add:
 
     feature/small_description
+    
+## Issues
+
+Feel free to report issues https://github.com/Backbase/install-bash-script/issues
 
 ## Owners
 
