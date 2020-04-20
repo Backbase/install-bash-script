@@ -1,0 +1,856 @@
+
+☁  unix [master] sh ./installcx6.sh
+Setting Script Constants...
+    -Tomcat   : 8.5.51
+    -ActiveMQ : 5.15.12
+    -Base Path: /tmp/opt/backbase
+    -CX6      : 6.2.3.1
+    -IPS      : 1.11.8
+Enter mysql ROOT user password when prompted.
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Building CX Filesystem Directory Structure in /tmp/opt/backbase
+Building CX Tomcat Directory Structure
+Building ActiveMQ Directory Structure
+Certificate was added to keystore
+Configuring CX6 Tomcat Instances
+~/Data/Work/Projects/BB/install-bash-script/local-install ~/Data/Work/Projects/BB/install-bash-script/unix
+Downloading ActiveMQ
+--2020-04-20 13:18:39--  http://archive.apache.org/dist/activemq/5.15.12/apache-activemq-5.15.12-bin.tar.gz
+Resolving archive.apache.org (archive.apache.org)... 163.172.17.199
+Connecting to archive.apache.org (archive.apache.org)|163.172.17.199|:80... connected.
+HTTP request sent, awaiting response... 304 Not Modified
+File 'apache-activemq-5.15.12-bin.tar.gz' not modified on server. Omitting download.
+
+Downloading Tomcat
+--2020-04-20 13:18:43--  https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.51/bin/apache-tomcat-8.5.51.tar.gz
+Resolving archive.apache.org (archive.apache.org)... 163.172.17.199
+Connecting to archive.apache.org (archive.apache.org)|163.172.17.199|:443... connected.
+HTTP request sent, awaiting response... 304 Not Modified
+File 'apache-tomcat-8.5.51.tar.gz' not modified on server. Omitting download.
+
+Installing Base Tomcat libraries (geronimo, mysql)
+--2020-04-20 13:18:43--  https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.44/mysql-connector-java-5.1.44.jar
+Resolving repo1.maven.org (repo1.maven.org)... 151.101.36.209
+Connecting to repo1.maven.org (repo1.maven.org)|151.101.36.209|:443... connected.
+HTTP request sent, awaiting response... 304 Not Modified
+File 'mysql-connector-java-5.1.44.jar' not modified on server. Omitting download.
+
+--2020-04-20 13:18:43--  https://repo1.maven.org/maven2/org/apache/geronimo/specs/geronimo-jms_1.1_spec/1.1.1/geronimo-jms_1.1_spec-1.1.1.jar
+Resolving repo1.maven.org (repo1.maven.org)... 151.101.36.209
+Connecting to repo1.maven.org (repo1.maven.org)|151.101.36.209|:443... connected.
+HTTP request sent, awaiting response... 304 Not Modified
+File 'geronimo-jms_1.1_spec-1.1.1.jar' not modified on server. Omitting download.
+
+Artifactory Username:bhupendra
+Artifactory Password:Downloading CX6 BOM File
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:get (default-cli) @ standalone-pom ---
+[WARNING] repositoryUrl parameter is deprecated. Use remoteRepositories instead
+[INFO] Resolving com.backbase.cxp:cx-bom:pom:6.2.3.1 with transitive dependencies
+[WARNING] destination/dest parameter is deprecated: it will disappear in future version.
+[INFO] Copying /Users/bhupendra/.m2/repository/com/backbase/cxp/cx-bom/6.2.3.1/cx-bom-6.2.3.1.pom to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/.
+[WARNING] Notice transitive dependencies won't be copied.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 4.039 s
+[INFO] Finished at: 2020-04-20T13:20:01+02:00
+[INFO] ------------------------------------------------------------------------
+Downloading IPS BOM File
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:get (default-cli) @ standalone-pom ---
+[WARNING] repositoryUrl parameter is deprecated. Use remoteRepositories instead
+[INFO] Resolving com.backbase:platform-bom:pom:1.11.8 with transitive dependencies
+[WARNING] destination/dest parameter is deprecated: it will disappear in future version.
+[INFO] Copying /Users/bhupendra/.m2/repository/com/backbase/platform-bom/1.11.8/platform-bom-1.11.8.pom to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/.
+[WARNING] Notice transitive dependencies won't be copied.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 4.161 s
+[INFO] Finished at: 2020-04-20T13:20:11+02:00
+[INFO] ------------------------------------------------------------------------
+Downloading IPS War Files
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ---------------------< com.backbase:platform-bom >----------------------
+[INFO] Building Backbase Platform BOM 1.11.8
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:3.1.1:copy (copy) @ platform-bom ---
+[INFO] Configured Artifact: com.backbase.infra:gateway:1.13.0:war
+[INFO] Configured Artifact: com.backbase.infra:registry:1.9.0:war
+[INFO] Configured Artifact: com.backbase.identity:bb-authentication-token-converter-service:1.2.20:war
+[INFO] com.backbase.infra:gateway:1.13.0:war already exists in /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install
+[INFO] com.backbase.infra:registry:1.9.0:war already exists in /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install
+[INFO] com.backbase.identity:bb-authentication-token-converter-service:1.2.20:war already exists in /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 5.921 s
+[INFO] Finished at: 2020-04-20T13:20:22+02:00
+[INFO] ------------------------------------------------------------------------
+Downloading CX6 War Files
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ----------------------< com.backbase.cxp:cx-bom >-----------------------
+[INFO] Building Backbase CXP BOM 6.2.3.1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:copy-dependencies (default-cli) @ cx-bom ---
+[INFO] contentservices-b1105.war already exists in destination.
+[INFO] versionmanagement-persistence-service-1.1.7.war already exists in destination.
+[INFO] push-integration-service-2.0.0.war already exists in destination.
+[INFO] portal-b1945.war already exists in destination.
+[INFO] renditionservice-b366.war already exists in destination.
+[INFO] thumbnailservice-b221.war already exists in destination.
+[INFO] space-controller-service-1.1.0-b17.war already exists in destination.
+[INFO] targeting-1.1.0-b11.war already exists in destination.
+[INFO] auditing-b251.war already exists in destination.
+[INFO] provisioning-b424.war already exists in destination.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 5.257 s
+[INFO] Finished at: 2020-04-20T13:20:34+02:00
+[INFO] ------------------------------------------------------------------------
+Downloading CX6 SQL Files
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ----------------------< com.backbase.cxp:cx-bom >-----------------------
+[INFO] Building Backbase CXP BOM 6.2.3.1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:copy-dependencies (default-cli) @ cx-bom ---
+[INFO] Copying renditionservice-b366-sql.zip to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/sqlscripts/renditionservice-sql.zip
+[INFO] Copying push-integration-service-2.0.0-sql.zip to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/sqlscripts/push-integration-service-sql.zip
+[INFO] Copying space-controller-service-1.1.0-b17-sql.zip to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/sqlscripts/space-controller-service-sql.zip
+[INFO] Copying portal-b1945-sql.zip to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/sqlscripts/portal-sql.zip
+[INFO] Copying auditing-b251-sql.zip to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/sqlscripts/auditing-sql.zip
+[INFO] Copying targeting-1.1.0-b11-sql.zip to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/sqlscripts/targeting-sql.zip
+[INFO] Copying contentservices-b1105-sql.zip to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/sqlscripts/contentservices-sql.zip
+[INFO] Copying versionmanagement-persistence-service-1.1.7-sql.zip to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/sqlscripts/versionmanagement-persistence-service-sql.zip
+[INFO] Copying provisioning-b424-sql.zip to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/sqlscripts/provisioning-sql.zip
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 13.472 s
+[INFO] Finished at: 2020-04-20T13:20:54+02:00
+[INFO] ------------------------------------------------------------------------
+Downloading CX6 Experience Manager
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ----------------------< com.backbase.cxp:cx-bom >-----------------------
+[INFO] Building Backbase CXP BOM 6.2.3.1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:copy-dependencies (default-cli) @ cx-bom ---
+[INFO] experience-manager-b3554.zip already exists in destination.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 3.573 s
+[INFO] Finished at: 2020-04-20T13:21:02+02:00
+[INFO] ------------------------------------------------------------------------
+Downloading CX6 Editorial Collection
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ----------------------< com.backbase.cxp:cx-bom >-----------------------
+[INFO] Building Backbase CXP BOM 6.2.3.1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:copy-dependencies (default-cli) @ cx-bom ---
+[INFO] editorial-collection-b3554.zip already exists in destination.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 3.963 s
+[INFO] Finished at: 2020-04-20T13:21:11+02:00
+[INFO] ------------------------------------------------------------------------
+Downloading Approvals
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:get (default-cli) @ standalone-pom ---
+[INFO] Resolving com.backbase.cxp:collection-approvals:zip:portal:0.0.17 with transitive dependencies
+[WARNING] destination/dest parameter is deprecated: it will disappear in future version.
+[INFO] Copying /Users/bhupendra/.m2/repository/com/backbase/cxp/collection-approvals/0.0.17/collection-approvals-0.0.17-portal.zip to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/.
+[WARNING] Notice transitive dependencies won't be copied.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.113 s
+[INFO] Finished at: 2020-04-20T13:21:17+02:00
+[INFO] ------------------------------------------------------------------------
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------< org.apache.maven:standalone-pom >-------------------
+[INFO] Building Maven Stub Project (No POM) 1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:get (default-cli) @ standalone-pom ---
+[INFO] Resolving com.backbase.cxp:collection-approvals:zip:page:0.0.17 with transitive dependencies
+[WARNING] destination/dest parameter is deprecated: it will disappear in future version.
+[INFO] Copying /Users/bhupendra/.m2/repository/com/backbase/cxp/collection-approvals/0.0.17/collection-approvals-0.0.17-page.zip to /Users/bhupendra/Data/Work/Projects/BB/install-bash-script/local-install/.
+[WARNING] Notice transitive dependencies won't be copied.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.153 s
+[INFO] Finished at: 2020-04-20T13:21:22+02:00
+[INFO] ------------------------------------------------------------------------
+Downloading Web SDK
+--2020-04-20 13:21:22--  https://repo.backbase.com/expert-release-local/com/backbase/web-sdk/collection/collection-bb-web-sdk/1.10.0/collection-bb-web-sdk-1.10.0.zip
+Resolving repo.backbase.com (repo.backbase.com)... 85.17.114.27
+Connecting to repo.backbase.com (repo.backbase.com)|85.17.114.27|:443... connected.
+HTTP request sent, awaiting response... 401 Unauthorized
+Authentication selected: Basic realm="Artifactory Realm"
+Reusing existing connection to repo.backbase.com:443.
+HTTP request sent, awaiting response... 304 Not Modified
+File 'collection-bb-web-sdk-1.10.0.zip' not modified on server. Omitting download.
+
+Downloading Importer Jar Tool
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ----------------------< com.backbase.cxp:cx-bom >-----------------------
+[INFO] Building Backbase CXP BOM 6.2.3.1
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO]
+[INFO] --- maven-dependency-plugin:2.8:copy-dependencies (default-cli) @ cx-bom ---
+[INFO] cx6-import-tool-cli-6.2.3.1-b58.jar already exists in destination.
+[INFO] cx6-import-tool-6.2.3.1-b58.jar already exists in destination.
+[INFO] cx6-import-tool-parent-6.2.3.1-b58.pom already exists in destination.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 2.458 s
+[INFO] Finished at: 2020-04-20T13:21:27+02:00
+[INFO] ------------------------------------------------------------------------
+Downloading Demo Auth service
+--2020-04-20 13:21:27--  https://repo.backbase.com/backbase-6-release/com/backbase/infra/authentication-dev/1.4.0/authentication-dev-1.4.0.war
+Resolving repo.backbase.com (repo.backbase.com)... 85.17.114.27
+Connecting to repo.backbase.com (repo.backbase.com)|85.17.114.27|:443... connected.
+HTTP request sent, awaiting response... 401 Unauthorized
+Authentication selected: Basic realm="Artifactory Realm"
+Reusing existing connection to repo.backbase.com:443.
+HTTP request sent, awaiting response... 304 Not Modified
+File 'authentication-dev-1.4.0.war' not modified on server. Omitting download.
+
+~/Data/Work/Projects/BB/install-bash-script/unix
+Installing ActiveMQ version v5.15.12
+Copying local ActiveMQ
+/var/folders/18/m0mghkfd12q9b200hc374wnw52h2jy/T/tmp.4bDmeoet ~/Data/Work/Projects/BB/install-bash-script/unix
+~/Data/Work/Projects/BB/install-bash-script/unix
+Installing Base Tomcat version v8.5.51
+Copying local Tomcat
+/var/folders/18/m0mghkfd12q9b200hc374wnw52h2jy/T/tmp.lIgZblUw ~/Data/Work/Projects/BB/install-bash-script/unix
+Installing Base Tomcat libraries (geronimo, mysql)
+~/Data/Work/Projects/BB/install-bash-script/unix
+/var/folders/18/m0mghkfd12q9b200hc374wnw52h2jy/T/tmp.2DKkW4Ld ~/Data/Work/Projects/BB/install-bash-script/unix
+Archive:  space-controller-service-sql.zip
+   creating: db-scripts/space-controller/
+   creating: db-scripts/space-controller/mssql/
+   creating: db-scripts/space-controller/mssql/create/
+   creating: db-scripts/space-controller/mssql/upgrade_6_2_1_to_6_2_2/
+   creating: db-scripts/space-controller/mssql/upgrade_6_2_2_to_6_2_3/
+   creating: db-scripts/space-controller/mysql/
+   creating: db-scripts/space-controller/mysql/create/
+   creating: db-scripts/space-controller/mysql/upgrade_6_2_1_to_6_2_2/
+   creating: db-scripts/space-controller/mysql/upgrade_6_2_2_to_6_2_3/
+   creating: db-scripts/space-controller/oracle/
+   creating: db-scripts/space-controller/oracle/create/
+   creating: db-scripts/space-controller/oracle/upgrade_6_2_1_to_6_2_2/
+   creating: db-scripts/space-controller/oracle/upgrade_6_2_2_to_6_2_3/
+  inflating: db-scripts/space-controller/mssql/upgrade_6_2_1_to_6_2_2/space-controller.sql
+  inflating: db-scripts/space-controller/mssql/upgrade_6_2_2_to_6_2_3/space-controller.sql
+  inflating: db-scripts/space-controller/mysql/upgrade_6_2_1_to_6_2_2/space-controller.sql
+  inflating: db-scripts/space-controller/mysql/upgrade_6_2_2_to_6_2_3/space-controller.sql
+  inflating: db-scripts/space-controller/oracle/create/space-controller.sql
+  inflating: db-scripts/space-controller/oracle/upgrade_6_2_1_to_6_2_2/space-controller.sql
+  inflating: db-scripts/space-controller/oracle/upgrade_6_2_2_to_6_2_3/space-controller.sql
+  inflating: db-scripts/space-controller/mssql/create/space-controller.sql
+  inflating: db-scripts/space-controller/mysql/create/space-controller.sql
+
+Archive:  contentservices-sql.zip
+   creating: db-scripts/contentservices/
+   creating: db-scripts/contentservices/mssql/
+   creating: db-scripts/contentservices/mssql/create/
+   creating: db-scripts/contentservices/mssql/upgrade_6_0_21_to_6_0_22/
+   creating: db-scripts/contentservices/mssql/upgrade_6_1_4_to_6_1_5/
+   creating: db-scripts/contentservices/mssql/upgrade_6_1_5_to_6_2_0/
+   creating: db-scripts/contentservices/mssql/upgrade_6_2_0_to_6_2_1/
+   creating: db-scripts/contentservices/mysql/
+   creating: db-scripts/contentservices/mysql/create/
+   creating: db-scripts/contentservices/mysql/upgrade_6_0_12_to_6_0_13/
+   creating: db-scripts/contentservices/mysql/upgrade_6_0_21_to_6_0_22/
+   creating: db-scripts/contentservices/mysql/upgrade_6_1_4_to_6_1_5/
+   creating: db-scripts/contentservices/mysql/upgrade_6_1_5_to_6_2_0/
+   creating: db-scripts/contentservices/mysql/upgrade_6_2_0_to_6_2_1/
+   creating: db-scripts/contentservices/oracle/
+   creating: db-scripts/contentservices/oracle/create/
+   creating: db-scripts/contentservices/oracle/upgrade_6_0_12_to_6_0_13/
+   creating: db-scripts/contentservices/oracle/upgrade_6_0_21_to_6_0_22/
+   creating: db-scripts/contentservices/oracle/upgrade_6_1_4_to_6_1_5/
+   creating: db-scripts/contentservices/oracle/upgrade_6_1_5_to_6_2_0/
+   creating: db-scripts/contentservices/oracle/upgrade_6_2_0_to_6_2_1/
+  inflating: db-scripts/contentservices/mssql/create/contentservices.sql
+  inflating: db-scripts/contentservices/mssql/upgrade_6_1_4_to_6_1_5/contentservices.sql
+  inflating: db-scripts/contentservices/mssql/upgrade_6_1_5_to_6_2_0/contentservices.sql
+  inflating: db-scripts/contentservices/mssql/upgrade_6_2_0_to_6_2_1/contentservices.sql
+  inflating: db-scripts/contentservices/mysql/create/contentservices.sql
+  inflating: db-scripts/contentservices/mysql/upgrade_6_0_12_to_6_0_13/contentservices.sql
+  inflating: db-scripts/contentservices/mysql/upgrade_6_0_21_to_6_0_22/contentservices.sql
+  inflating: db-scripts/contentservices/mysql/upgrade_6_1_4_to_6_1_5/contentservices.sql
+  inflating: db-scripts/contentservices/mysql/upgrade_6_1_5_to_6_2_0/contentservices.sql
+  inflating: db-scripts/contentservices/mysql/upgrade_6_2_0_to_6_2_1/contentservices.sql
+  inflating: db-scripts/contentservices/oracle/create/contentservices.sql
+  inflating: db-scripts/contentservices/oracle/upgrade_6_0_12_to_6_0_13/contentservices.sql
+  inflating: db-scripts/contentservices/oracle/upgrade_6_0_21_to_6_0_22/contentservices.sql
+  inflating: db-scripts/contentservices/oracle/upgrade_6_1_4_to_6_1_5/contentservices.sql
+  inflating: db-scripts/contentservices/oracle/upgrade_6_1_5_to_6_2_0/contentservices.sql
+  inflating: db-scripts/contentservices/oracle/upgrade_6_2_0_to_6_2_1/contentservices.sql
+  inflating: db-scripts/contentservices/mssql/upgrade_6_0_21_to_6_0_22/contentservices.sql
+
+Archive:  targeting-sql.zip
+   creating: db-scripts/targeting/
+   creating: db-scripts/targeting/mssql/
+   creating: db-scripts/targeting/mssql/create/
+   creating: db-scripts/targeting/mssql/upgrade_6_0_23_to_6_0_24/
+   creating: db-scripts/targeting/mssql/upgrade_6_0_24_to_6_1_0/
+   creating: db-scripts/targeting/mssql/upgrade_6_1_1_to_6_1_2/
+   creating: db-scripts/targeting/mssql/upgrade_6_1_2_to_6_1_5/
+   creating: db-scripts/targeting/mysql/
+   creating: db-scripts/targeting/mysql/create/
+   creating: db-scripts/targeting/mysql/upgrade_6_0_23_to_6_0_24/
+   creating: db-scripts/targeting/mysql/upgrade_6_0_24_to_6_1_0/
+   creating: db-scripts/targeting/mysql/upgrade_6_1_1_to_6_1_2/
+   creating: db-scripts/targeting/mysql/upgrade_6_1_2_to_6_1_5/
+   creating: db-scripts/targeting/oracle/
+   creating: db-scripts/targeting/oracle/create/
+   creating: db-scripts/targeting/oracle/upgrade_6_0_23_to_6_0_24/
+   creating: db-scripts/targeting/oracle/upgrade_6_0_24_to_6_1_0/
+   creating: db-scripts/targeting/oracle/upgrade_6_1_1_to_6_1_2/
+   creating: db-scripts/targeting/oracle/upgrade_6_1_2_to_6_1_5/
+  inflating: db-scripts/targeting/mssql/create/targeting.sql
+  inflating: db-scripts/targeting/mssql/upgrade_6_0_24_to_6_1_0/targeting.sql
+  inflating: db-scripts/targeting/mssql/upgrade_6_1_1_to_6_1_2/targeting.sql
+  inflating: db-scripts/targeting/mssql/upgrade_6_1_2_to_6_1_5/targeting.sql
+  inflating: db-scripts/targeting/mysql/create/targeting.sql
+  inflating: db-scripts/targeting/mysql/upgrade_6_0_23_to_6_0_24/targeting.sql
+  inflating: db-scripts/targeting/mysql/upgrade_6_0_24_to_6_1_0/targeting.sql
+  inflating: db-scripts/targeting/mysql/upgrade_6_1_1_to_6_1_2/targeting.sql
+  inflating: db-scripts/targeting/mysql/upgrade_6_1_2_to_6_1_5/targeting.sql
+  inflating: db-scripts/targeting/oracle/create/targeting.sql
+  inflating: db-scripts/targeting/oracle/upgrade_6_0_23_to_6_0_24/targeting.sql
+  inflating: db-scripts/targeting/oracle/upgrade_6_0_24_to_6_1_0/targeting.sql
+  inflating: db-scripts/targeting/oracle/upgrade_6_1_1_to_6_1_2/targeting.sql
+  inflating: db-scripts/targeting/oracle/upgrade_6_1_2_to_6_1_5/targeting.sql
+  inflating: db-scripts/targeting/mssql/upgrade_6_0_23_to_6_0_24/targeting.sql
+
+Archive:  auditing-sql.zip
+   creating: db-scripts/auditing/
+   creating: db-scripts/auditing/mssql/
+   creating: db-scripts/auditing/mssql/create/
+   creating: db-scripts/auditing/mysql/
+   creating: db-scripts/auditing/mysql/create/
+   creating: db-scripts/auditing/oracle/
+   creating: db-scripts/auditing/oracle/create/
+  inflating: db-scripts/auditing/mssql/create/auditing.sql
+  inflating: db-scripts/auditing/oracle/create/auditing.sql
+  inflating: db-scripts/auditing/mysql/create/auditing.sql
+
+Archive:  provisioning-sql.zip
+   creating: db-scripts/provisioning/
+   creating: db-scripts/provisioning/mssql/
+   creating: db-scripts/provisioning/mssql/create/
+   creating: db-scripts/provisioning/mssql/upgrade_6_0_15_to_6_0_16/
+   creating: db-scripts/provisioning/mssql/upgrade_6_0_17_to_6_0_18/
+   creating: db-scripts/provisioning/mssql/upgrade_6_1_0_to_6_1_1/
+   creating: db-scripts/provisioning/mssql/upgrade_6_1_3_to_6_1_4/
+   creating: db-scripts/provisioning/mssql/upgrade_6_1_5_to_6_2_0/
+   creating: db-scripts/provisioning/mssql/upgrade_6_2_0_to_6_2_1/
+   creating: db-scripts/provisioning/mssql/upgrade_6_2_1_to_6_2_2/
+   creating: db-scripts/provisioning/mysql/
+   creating: db-scripts/provisioning/mysql/create/
+   creating: db-scripts/provisioning/mysql/upgrade_6_0_15_to_6_0_16/
+   creating: db-scripts/provisioning/mysql/upgrade_6_0_17_to_6_0_18/
+   creating: db-scripts/provisioning/mysql/upgrade_6_1_0_to_6_1_1/
+   creating: db-scripts/provisioning/mysql/upgrade_6_1_3_to_6_1_4/
+   creating: db-scripts/provisioning/mysql/upgrade_6_1_5_to_6_2_0/
+   creating: db-scripts/provisioning/mysql/upgrade_6_2_0_to_6_2_1/
+   creating: db-scripts/provisioning/mysql/upgrade_6_2_1_to_6_2_2/
+   creating: db-scripts/provisioning/oracle/
+   creating: db-scripts/provisioning/oracle/create/
+   creating: db-scripts/provisioning/oracle/upgrade_6_0_15_to_6_0_16/
+   creating: db-scripts/provisioning/oracle/upgrade_6_0_17_to_6_0_18/
+   creating: db-scripts/provisioning/oracle/upgrade_6_1_0_to_6_1_1/
+   creating: db-scripts/provisioning/oracle/upgrade_6_1_3_to_6_1_4/
+   creating: db-scripts/provisioning/oracle/upgrade_6_1_5_to_6_2_0/
+   creating: db-scripts/provisioning/oracle/upgrade_6_2_0_to_6_2_1/
+   creating: db-scripts/provisioning/oracle/upgrade_6_2_1_to_6_2_2/
+  inflating: db-scripts/provisioning/mssql/create/provisioning.sql
+  inflating: db-scripts/provisioning/mssql/upgrade_6_0_17_to_6_0_18/provisioning.sql
+  inflating: db-scripts/provisioning/mssql/upgrade_6_1_0_to_6_1_1/provisioning.sql
+  inflating: db-scripts/provisioning/mssql/upgrade_6_1_3_to_6_1_4/provisioning.sql
+  inflating: db-scripts/provisioning/mssql/upgrade_6_1_5_to_6_2_0/provisioning.sql
+  inflating: db-scripts/provisioning/mssql/upgrade_6_2_0_to_6_2_1/provisioning.sql
+  inflating: db-scripts/provisioning/mssql/upgrade_6_2_1_to_6_2_2/provisioning.sql
+  inflating: db-scripts/provisioning/mysql/create/provisioning.sql
+  inflating: db-scripts/provisioning/mysql/upgrade_6_0_15_to_6_0_16/provisioning.sql
+  inflating: db-scripts/provisioning/mysql/upgrade_6_0_17_to_6_0_18/provisioning.sql
+  inflating: db-scripts/provisioning/mysql/upgrade_6_1_0_to_6_1_1/provisioning.sql
+  inflating: db-scripts/provisioning/mysql/upgrade_6_1_3_to_6_1_4/provisioning.sql
+  inflating: db-scripts/provisioning/mysql/upgrade_6_1_5_to_6_2_0/provisioning.sql
+  inflating: db-scripts/provisioning/mysql/upgrade_6_2_0_to_6_2_1/provisioning.sql
+  inflating: db-scripts/provisioning/mysql/upgrade_6_2_1_to_6_2_2/provisioning.sql
+  inflating: db-scripts/provisioning/oracle/create/provisioning.sql
+  inflating: db-scripts/provisioning/oracle/upgrade_6_0_15_to_6_0_16/provisioning.sql
+  inflating: db-scripts/provisioning/oracle/upgrade_6_0_17_to_6_0_18/provisioning.sql
+  inflating: db-scripts/provisioning/oracle/upgrade_6_1_0_to_6_1_1/provisioning.sql
+  inflating: db-scripts/provisioning/oracle/upgrade_6_1_3_to_6_1_4/provisioning.sql
+  inflating: db-scripts/provisioning/oracle/upgrade_6_1_5_to_6_2_0/provisioning.sql
+  inflating: db-scripts/provisioning/oracle/upgrade_6_2_0_to_6_2_1/provisioning.sql
+  inflating: db-scripts/provisioning/oracle/upgrade_6_2_1_to_6_2_2/provisioning.sql
+  inflating: db-scripts/provisioning/mssql/upgrade_6_0_15_to_6_0_16/provisioning.sql
+
+Archive:  portal-sql.zip
+   creating: db-scripts/portal/
+   creating: db-scripts/portal/mssql/
+   creating: db-scripts/portal/mssql/create/
+   creating: db-scripts/portal/mssql/upgrade_6_0_21_to_6_0_22/
+   creating: db-scripts/portal/mssql/upgrade_6_0_23_to_6_0_24/
+   creating: db-scripts/portal/mssql/upgrade_6_1_5_to_6_2_0/
+   creating: db-scripts/portal/mysql/
+   creating: db-scripts/portal/mysql/create/
+   creating: db-scripts/portal/mysql/upgrade_6_0_21_to_6_0_22/
+   creating: db-scripts/portal/mysql/upgrade_6_0_23_to_6_0_24/
+   creating: db-scripts/portal/mysql/upgrade_6_0_9_to_6_0_10/
+   creating: db-scripts/portal/mysql/upgrade_6_1_5_to_6_2_0/
+   creating: db-scripts/portal/oracle/
+   creating: db-scripts/portal/oracle/create/
+   creating: db-scripts/portal/oracle/upgrade_6_0_21_to_6_0_22/
+   creating: db-scripts/portal/oracle/upgrade_6_0_23_to_6_0_24/
+   creating: db-scripts/portal/oracle/upgrade_6_0_9_to_6_0_10/
+   creating: db-scripts/portal/oracle/upgrade_6_1_5_to_6_2_0/
+  inflating: db-scripts/portal/mssql/create/portal.sql
+  inflating: db-scripts/portal/mssql/upgrade_6_0_23_to_6_0_24/portal.sql
+  inflating: db-scripts/portal/mssql/upgrade_6_1_5_to_6_2_0/portal.sql
+  inflating: db-scripts/portal/mysql/create/portal.sql
+  inflating: db-scripts/portal/mysql/upgrade_6_0_21_to_6_0_22/portal.sql
+  inflating: db-scripts/portal/mysql/upgrade_6_0_23_to_6_0_24/portal.sql
+  inflating: db-scripts/portal/mysql/upgrade_6_0_9_to_6_0_10/portal.sql
+  inflating: db-scripts/portal/mysql/upgrade_6_1_5_to_6_2_0/portal.sql
+  inflating: db-scripts/portal/oracle/create/portal.sql
+  inflating: db-scripts/portal/oracle/upgrade_6_0_21_to_6_0_22/portal.sql
+  inflating: db-scripts/portal/oracle/upgrade_6_0_23_to_6_0_24/portal.sql
+  inflating: db-scripts/portal/oracle/upgrade_6_0_9_to_6_0_10/portal.sql
+  inflating: db-scripts/portal/oracle/upgrade_6_1_5_to_6_2_0/portal.sql
+  inflating: db-scripts/portal/mssql/upgrade_6_0_21_to_6_0_22/portal.sql
+
+Archive:  push-integration-service-sql.zip
+   creating: db-scripts/push-integration-service/
+   creating: db-scripts/push-integration-service/oracle/
+   creating: db-scripts/push-integration-service/oracle/upgrade_1_1_6_to_2_0_0/
+   creating: db-scripts/push-integration-service/oracle/create/
+   creating: db-scripts/push-integration-service/mysql/
+   creating: db-scripts/push-integration-service/mysql/upgrade_1_1_6_to_2_0_0/
+   creating: db-scripts/push-integration-service/mysql/create/
+   creating: db-scripts/push-integration-service/mssql/
+   creating: db-scripts/push-integration-service/mssql/upgrade_1_1_6_to_2_0_0/
+   creating: db-scripts/push-integration-service/mssql/create/
+  inflating: db-scripts/push-integration-service/oracle/upgrade_1_1_6_to_2_0_0/push-integration-service.sql
+  inflating: db-scripts/push-integration-service/oracle/create/push-integration-service.sql
+  inflating: db-scripts/push-integration-service/mysql/upgrade_1_1_6_to_2_0_0/push-integration-service.sql
+  inflating: db-scripts/push-integration-service/mysql/create/push-integration-service.sql
+  inflating: db-scripts/push-integration-service/mssql/upgrade_1_1_6_to_2_0_0/push-integration-service.sql
+  inflating: db-scripts/push-integration-service/mssql/create/push-integration-service.sql
+
+Archive:  versionmanagement-persistence-service-sql.zip
+   creating: db-scripts/versionmanagement-persistence-service/
+   creating: db-scripts/versionmanagement-persistence-service/oracle/
+   creating: db-scripts/versionmanagement-persistence-service/oracle/upgrade_1_1_5_to_1_1_6/
+   creating: db-scripts/versionmanagement-persistence-service/mysql/
+   creating: db-scripts/versionmanagement-persistence-service/mysql/upgrade_1_1_5_to_1_1_6/
+   creating: db-scripts/versionmanagement-persistence-service/mssql/
+   creating: db-scripts/versionmanagement-persistence-service/mssql/upgrade_1_1_5_to_1_1_6/
+  inflating: db-scripts/versionmanagement-persistence-service/oracle/upgrade_1_1_5_to_1_1_6/1_1_6.sql
+  inflating: db-scripts/versionmanagement-persistence-service/oracle/schema.sql
+  inflating: db-scripts/versionmanagement-persistence-service/oracle/drop_schema.sql
+  inflating: db-scripts/versionmanagement-persistence-service/mysql/upgrade_1_1_5_to_1_1_6/1_1_6.sql
+  inflating: db-scripts/versionmanagement-persistence-service/mysql/schema.sql
+  inflating: db-scripts/versionmanagement-persistence-service/mysql/drop_schema.sql
+  inflating: db-scripts/versionmanagement-persistence-service/mssql/upgrade_1_1_5_to_1_1_6/1_1_6.sql
+  inflating: db-scripts/versionmanagement-persistence-service/mssql/upgrade_1_1_5_to_1_1_6/versionmanagement-persistence-service.sql
+  inflating: db-scripts/versionmanagement-persistence-service/mssql/versionmanagement-persistence-service.sql
+  inflating: db-scripts/versionmanagement-persistence-service/mssql/drop_schema.sql
+
+Archive:  renditionservice-sql.zip
+   creating: db-scripts/renditionservice/
+   creating: db-scripts/renditionservice/mssql/
+   creating: db-scripts/renditionservice/mssql/create/
+   creating: db-scripts/renditionservice/mysql/
+   creating: db-scripts/renditionservice/mysql/create/
+   creating: db-scripts/renditionservice/oracle/
+   creating: db-scripts/renditionservice/oracle/create/
+  inflating: db-scripts/renditionservice/mssql/create/renditionservice.sql
+  inflating: db-scripts/renditionservice/oracle/create/renditionservice.sql
+  inflating: db-scripts/renditionservice/mysql/create/renditionservice.sql
+
+9 archives were successfully processed.
+Copying Editorial Wars
+Copying IPS Wars
+Copying Portal Wars
+Creating CXS databases
+mysql: [Warning] Using a password on the command line interface can be insecure.
+mysql: [Warning] Using a password on the command line interface can be insecure.
+mysql: [Warning] Using a password on the command line interface can be insecure.
+mysql: [Warning] Using a password on the command line interface can be insecure.
+mysql: [Warning] Using a password on the command line interface can be insecure.
+mysql: [Warning] Using a password on the command line interface can be insecure.
+mysql: [Warning] Using a password on the command line interface can be insecure.
+~/Data/Work/Projects/BB/install-bash-script/unix
+Starting ActiveMQ
+  TCP : 61616
+  SSL : 61617
+INFO: Loading '/private/tmp/opt/backbase/runtimes/activemq//bin/env'
+INFO: Using java '/Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home/bin/java'
+INFO: Starting - inspect logfiles specified in logging.properties and log4j.properties to get details
+INFO: pidfile created : '/private/tmp/opt/backbase/runtimes/activemq//data/activemq.pid' (pid '4880')
+Starting CX6 IPS Tomcat
+  HTTP : 8080
+  JDWP : 8020
+   JMX : 8050
+Using CATALINA_BASE:   /tmp/opt/backbase/runtimes/tomcat/platform
+Using CATALINA_HOME:   /tmp/opt/backbase/runtimes/tomcat/8.5.51
+Using CATALINA_TMPDIR: /tmp/opt/backbase/runtimes/tomcat/platform/temp
+Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home
+Using CLASSPATH:       /tmp/opt/backbase/runtimes/tomcat/8.5.51/bin/bootstrap.jar:/tmp/opt/backbase/runtimes/tomcat/8.5.51/bin/tomcat-juli.jar
+Tomcat started.
+Starting CX6 Portal Tomcat
+  HTTP : 8081
+  JDWP : 8021
+   JMX : 8051
+Using CATALINA_BASE:   /tmp/opt/backbase/runtimes/tomcat/portal
+Using CATALINA_HOME:   /tmp/opt/backbase/runtimes/tomcat/8.5.51
+Using CATALINA_TMPDIR: /tmp/opt/backbase/runtimes/tomcat/portal/temp
+Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home
+Using CLASSPATH:       /tmp/opt/backbase/runtimes/tomcat/8.5.51/bin/bootstrap.jar:/tmp/opt/backbase/runtimes/tomcat/8.5.51/bin/tomcat-juli.jar
+Tomcat started.
+Starting CX6 Editorial Tomcat
+  HTTP : 8082
+  JDWP : 8022
+   JMX : 8052
+Using CATALINA_BASE:   /tmp/opt/backbase/runtimes/tomcat/editorial
+Using CATALINA_HOME:   /tmp/opt/backbase/runtimes/tomcat/8.5.51
+Using CATALINA_TMPDIR: /tmp/opt/backbase/runtimes/tomcat/editorial/temp
+Using JRE_HOME:        /Library/Java/JavaVirtualMachines/jdk1.8.0_231.jdk/Contents/Home
+Using CLASSPATH:       /tmp/opt/backbase/runtimes/tomcat/8.5.51/bin/bootstrap.jar:/tmp/opt/backbase/runtimes/tomcat/8.5.51/bin/tomcat-juli.jar
+Tomcat started.
+=========================== Checking auth/actuator/health availability ===========================
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 0
+curl: (28) Operation timed out after 3001 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 1
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 2
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 3
+curl: (28) Operation timed out after 3001 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 4
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 5
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 6
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 7
+curl: (28) Operation timed out after 3003 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 8
+curl: (28) Operation timed out after 3001 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 9
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 10
+curl: (28) Operation timed out after 3001 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 11
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 12
+curl: (28) Operation timed out after 3001 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 13
+curl: (28) Operation timed out after 3001 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 14
+curl: (28) Operation timed out after 3003 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 15
+curl: (28) Operation timed out after 3003 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 16
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 17
+curl: (28) Operation timed out after 3004 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 18
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 19
+curl: (28) Operation timed out after 3002 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 20
+curl: (7) Failed to connect to localhost port 8080: Operation timed out
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 21
+curl: (7) Failed to connect to localhost port 8080: Operation timed out
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 22
+curl: (7) Failed to connect to localhost port 8080: Operation timed out
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 23
+curl: (7) Failed to connect to localhost port 8080: Operation timed out
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 24
+curl: (7) Failed to connect to localhost port 8080: Operation timed out
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 25
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 26
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 27
+
+Ping localhost:8080/gateway/api/auth/actuator/health .... try 28
+{"status":"UP"}
+=========================== Checking portal/actuator/health/liveness availability ===========================
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 0
+curl: (28) Operation timed out after 3003 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 1
+curl: (28) Operation timed out after 3001 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 2
+curl: (28) Operation timed out after 3001 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 3
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 4
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 5
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 6
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 7
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 8
+curl: (28) Operation timed out after 3005 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 9
+curl: (28) Operation timed out after 3004 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 10
+curl: (28) Operation timed out after 3001 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 11
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 12
+curl: (28) Operation timed out after 3003 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 13
+curl: (28) Operation timed out after 3000 milliseconds with 0 bytes received
+
+Ping localhost:8080/gateway/api/portal/actuator/health/liveness .... try 14
+{"status":"UP"}
+=========================== Checking contentservices/actuator/health/liveness availability ===========================
+Ping localhost:8080/gateway/api/contentservices/actuator/health/liveness .... try 0
+
+Ping localhost:8080/gateway/api/contentservices/actuator/health/liveness .... try 1
+
+Ping localhost:8080/gateway/api/contentservices/actuator/health/liveness .... try 2
+
+Ping localhost:8080/gateway/api/contentservices/actuator/health/liveness .... try 3
+
+Ping localhost:8080/gateway/api/contentservices/actuator/health/liveness .... try 4
+
+Ping localhost:8080/gateway/api/contentservices/actuator/health/liveness .... try 5
+{"status":"UP"}
+=========================== Checking provisioning/actuator/health/liveness availability ===========================
+Ping localhost:8080/gateway/api/provisioning/actuator/health/liveness .... try 0
+{"status":"UP"}
+/var/folders/18/m0mghkfd12q9b200hc374wnw52h2jy/T/tmp.S3rcMrQd ~/Data/Work/Projects/BB/install-bash-script/unix
+Provision Editorial Collection
+cx6-import-tool-cli  (v6.2.3.1-b58)
+
+
+2020-04-20 13:33:03.477  INFO 8965 --- [           main] c.b.t.c.i.c.e.AsyncModeImportExecutor    : Packages are going to be imported in ASYNC (parallel) mode
+2020-04-20 13:33:03.518  INFO 8965 --- [onPool-worker-1] c.b.t.cx.imex.command.ImportPackageJob   : Importing package '/private/var/folders/18/m0mghkfd12q9b200hc374wnw52h2jy/T/tmp.S3rcMrQd/editorial-collection.zip'
+2020-04-20 13:33:05.572  INFO 8965 --- [onPool-worker-1] c.b.tools.cx.imex.utils.AuthHelper       : Authenticating at 'http://localhost:8080/gateway/api/auth/login'
+2020-04-20 13:33:11.566 ERROR 8965 --- [onPool-worker-1] c.b.t.c.i.c.e.AsyncModeImportExecutor    : Could not import package 'editorial-collection.zip'
+2020-04-20 13:33:11.567 ERROR 8965 --- [onPool-worker-1] .c.i.e.h.HttpServerErrorExceptionHandler : Server HTTP Error: '500 null'. Response body: '{"timestamp":"2020-04-20T11:33:11.557+0000","status":500,"error":"Internal Server Error","message":"could not execute statement; nested exception is org.hibernate.exception.GenericJDBCException: could not execute statement","path":"/provisioning/importing/packages"}'
+** ERROR **
+{"timestamp":"2020-04-20T11:33:11.557+0000","status":500,"error":"Internal Server Error","message":"could not execute statement; nested exception is org.hibernate.exception.GenericJDBCException: could not execute statement","path":"/provisioning/importing/packages"}
+2020-04-20 13:33:11.583 ERROR 8965 --- [           main] c.b.t.c.i.e.h.DefaultExceptionHandler    : Import failed as there was at least one package that failed.
+2020-04-20 13:33:11.583 ERROR 8965 --- [           main] c.b.tools.cx.imex.ImExCommandExecutor    : Terminating with status: FAILED
+Provision Web SDK
+cx6-import-tool-cli  (v6.2.3.1-b58)
+
+
+2020-04-20 13:33:16.849  INFO 9051 --- [           main] c.b.t.c.i.c.e.AsyncModeImportExecutor    : Packages are going to be imported in ASYNC (parallel) mode
+2020-04-20 13:33:16.890  INFO 9051 --- [onPool-worker-1] c.b.t.cx.imex.command.ImportPackageJob   : Importing package '/private/var/folders/18/m0mghkfd12q9b200hc374wnw52h2jy/T/tmp.S3rcMrQd/collection-bb-web-sdk-1.10.0.zip'
+2020-04-20 13:33:17.285  INFO 9051 --- [onPool-worker-1] c.b.tools.cx.imex.utils.AuthHelper       : Authenticating at 'http://localhost:8080/gateway/api/auth/login'
+2020-04-20 13:33:25.051  INFO 9051 --- [onPool-worker-1] c.b.t.cx.imex.command.ImportPackageJob   : Import request completed for package UUID: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -
+2020-04-20 13:33:25.052  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : Tracking package status: '9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5'
+2020-04-20 13:33:25.758  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [1/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- UPLOADED
+2020-04-20 13:33:26.401  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [2/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:27.008  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [3/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:27.647  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [4/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:28.264  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [5/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:28.880  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [6/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:29.532  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [7/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:30.167  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [8/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:30.778  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [9/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:31.425  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [10/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:32.040  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [11/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:32.638  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [12/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:33.261  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [13/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:33.847  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [14/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:34.653  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [15/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:36.301  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [16/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:36.892  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [17/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:37.512  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [18/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:38.191  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [19/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:38.925  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [20/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:39.524  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [21/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:40.178  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [22/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:40.821  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [23/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:41.401  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [24/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:42.072  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [25/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:42.649  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [26/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:43.413  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [27/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:44.020  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [28/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:44.592  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [29/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:45.184  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [30/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:45.760  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [31/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:46.333  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [32/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:46.930  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [33/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:47.515  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [34/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:48.088  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [35/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:48.653  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [36/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:49.246  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [37/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:49.818  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [38/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:50.438  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [39/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:51.009  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [40/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROCESSING
+2020-04-20 13:33:51.576  INFO 9051 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [41/50] Provisioning: 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 -- PROVISIONED
+2020-04-20 13:33:51.577  INFO 9051 --- [onPool-worker-1] c.b.t.c.i.c.executor.ImportExecutor      : Package Status: catalog - 9eb2742c-1f99-4fb5-9cef-8fbf6df69dd5 - PROVISIONED
+2020-04-20 13:33:51.577  INFO 9051 --- [onPool-worker-1] c.b.t.c.i.c.executor.ImportExecutor      : 	Processed 57 items
+2020-04-20 13:33:51.578  INFO 9051 --- [           main] c.b.tools.cx.imex.ImExCommandExecutor    : Terminating with status: SUCCESS
+Provision Experience Manager
+cx6-import-tool-cli  (v6.2.3.1-b58)
+
+
+2020-04-20 13:33:59.073  INFO 9232 --- [           main] c.b.t.c.i.c.e.AsyncModeImportExecutor    : Packages are going to be imported in ASYNC (parallel) mode
+2020-04-20 13:33:59.119  INFO 9232 --- [onPool-worker-1] c.b.t.cx.imex.command.ImportPackageJob   : Importing package '/private/var/folders/18/m0mghkfd12q9b200hc374wnw52h2jy/T/tmp.S3rcMrQd/experience-manager.zip'
+2020-04-20 13:33:59.513  INFO 9232 --- [onPool-worker-1] c.b.tools.cx.imex.utils.AuthHelper       : Authenticating at 'http://localhost:8080/gateway/api/auth/login'
+2020-04-20 13:34:00.264  INFO 9232 --- [onPool-worker-1] c.b.t.cx.imex.command.ImportPackageJob   : Import request completed for package UUID: 6fcea200-5072-4f15-9d30-9340febdb136 -
+2020-04-20 13:34:00.266  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : Tracking package status: '6fcea200-5072-4f15-9d30-9340febdb136'
+2020-04-20 13:34:00.443  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [1/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- UPLOADED
+2020-04-20 13:34:01.010  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [2/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- PROCESSING
+2020-04-20 13:34:01.585  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [3/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- PROCESSING
+2020-04-20 13:34:02.163  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [4/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- PROCESSING
+2020-04-20 13:34:02.713  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [5/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- PROCESSING
+2020-04-20 13:34:03.275  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [6/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- PROCESSING
+2020-04-20 13:34:03.836  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [7/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- PROCESSING
+2020-04-20 13:34:04.479  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [8/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- PROCESSING
+2020-04-20 13:34:05.037  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [9/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- PROCESSING
+2020-04-20 13:34:05.673  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [10/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- PROCESSING
+2020-04-20 13:34:06.234  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [11/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- PROCESSING
+2020-04-20 13:34:06.800  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [12/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- PROCESSING
+2020-04-20 13:34:07.353  INFO 9232 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [13/50] Provisioning: 6fcea200-5072-4f15-9d30-9340febdb136 -- FAILED
+2020-04-20 13:34:07.354 ERROR 9232 --- [onPool-worker-1] c.b.t.c.i.c.e.AsyncModeImportExecutor    : Could not import package 'experience-manager.zip'
+2020-04-20 13:34:07.355 ERROR 9232 --- [onPool-worker-1] .e.h.PackageImportFailedExceptionHandler : Package '6fcea200-5072-4f15-9d30-9340febdb136': Import status: FAILED
+2020-04-20 13:34:07.355 ERROR 9232 --- [onPool-worker-1] .e.h.PackageImportFailedExceptionHandler : Package Items which were NOT provisioned:
+2020-04-20 13:34:07.355 ERROR 9232 --- [onPool-worker-1] .e.h.PackageImportFailedExceptionHandler : 	Item: experience-manager - FAILED: Cannot import item with UUID '8e6a27cc-3b7c-45d5-8a01-63ab32b8671d'
+Cannot import portalserver.xml
+HTTP request for importing Portal failed
+
+2020-04-20 13:34:07.356 ERROR 9232 --- [           main] c.b.t.c.i.e.h.DefaultExceptionHandler    : Import failed as there was at least one package that failed.
+2020-04-20 13:34:07.356 ERROR 9232 --- [           main] c.b.tools.cx.imex.ImExCommandExecutor    : Terminating with status: FAILED
+Provision Approvals
+cx6-import-tool-cli  (v6.2.3.1-b58)
+
+
+2020-04-20 13:34:13.926  INFO 9330 --- [           main] c.b.t.c.i.c.e.AsyncModeImportExecutor    : Packages are going to be imported in ASYNC (parallel) mode
+2020-04-20 13:34:13.965  INFO 9330 --- [onPool-worker-1] c.b.t.cx.imex.command.ImportPackageJob   : Importing package '/private/var/folders/18/m0mghkfd12q9b200hc374wnw52h2jy/T/tmp.S3rcMrQd/collection-approvals-0.0.17-page.zip'
+2020-04-20 13:34:14.247  INFO 9330 --- [onPool-worker-1] c.b.tools.cx.imex.utils.AuthHelper       : Authenticating at 'http://localhost:8080/gateway/api/auth/login'
+2020-04-20 13:34:14.695  INFO 9330 --- [onPool-worker-1] c.b.t.cx.imex.command.ImportPackageJob   : Import request completed for package UUID: 7fbc705a-5d81-4280-9183-812d831fb66f -
+2020-04-20 13:34:14.695  INFO 9330 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : Tracking package status: '7fbc705a-5d81-4280-9183-812d831fb66f'
+2020-04-20 13:34:14.806  INFO 9330 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [1/50] Provisioning: 7fbc705a-5d81-4280-9183-812d831fb66f -- PROCESSING
+2020-04-20 13:34:15.370  INFO 9330 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [2/50] Provisioning: 7fbc705a-5d81-4280-9183-812d831fb66f -- PROVISIONED
+2020-04-20 13:34:15.370  INFO 9330 --- [onPool-worker-1] c.b.t.c.i.c.executor.ImportExecutor      : Package Status: catalog - 7fbc705a-5d81-4280-9183-812d831fb66f - PROVISIONED
+2020-04-20 13:34:15.371  INFO 9330 --- [onPool-worker-1] c.b.t.c.i.c.executor.ImportExecutor      : 	Processed 1 items
+2020-04-20 13:34:15.371  INFO 9330 --- [           main] c.b.tools.cx.imex.ImExCommandExecutor    : Terminating with status: SUCCESS
+cx6-import-tool-cli  (v6.2.3.1-b58)
+
+
+2020-04-20 13:34:20.796  INFO 9392 --- [           main] c.b.t.c.i.c.e.AsyncModeImportExecutor    : Packages are going to be imported in ASYNC (parallel) mode
+2020-04-20 13:34:20.849  INFO 9392 --- [onPool-worker-1] c.b.t.cx.imex.command.ImportPackageJob   : Importing package '/private/var/folders/18/m0mghkfd12q9b200hc374wnw52h2jy/T/tmp.S3rcMrQd/collection-approvals-0.0.17-portal.zip'
+2020-04-20 13:34:21.343  INFO 9392 --- [onPool-worker-1] c.b.tools.cx.imex.utils.AuthHelper       : Authenticating at 'http://localhost:8080/gateway/api/auth/login'
+2020-04-20 13:34:21.736  INFO 9392 --- [onPool-worker-1] c.b.t.cx.imex.command.ImportPackageJob   : Import request completed for package UUID: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -
+2020-04-20 13:34:21.736  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : Tracking package status: 'f5ace1f8-7a66-4c70-b5e6-4f14830ff186'
+2020-04-20 13:34:21.899  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [1/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:22.589  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [2/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:23.143  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [3/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:23.697  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [4/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:24.259  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [5/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:24.825  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [6/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:25.708  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [7/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:26.258  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [8/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:26.808  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [9/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:27.364  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [10/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:27.923  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [11/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:28.480  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [12/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:29.029  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [13/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:29.610  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [14/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:30.217  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [15/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:30.770  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [16/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:31.317  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [17/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:31.887  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [18/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:32.441  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [19/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:32.998  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [20/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:33.556  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [21/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:34.107  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [22/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:34.657  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [23/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:35.205  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [24/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROCESSING
+2020-04-20 13:34:35.749  INFO 9392 --- [onPool-worker-1] .t.c.i.u.s.PackageProvisionStatusService : [25/50] Provisioning: f5ace1f8-7a66-4c70-b5e6-4f14830ff186 -- PROVISIONED
+2020-04-20 13:34:35.749  INFO 9392 --- [onPool-worker-1] c.b.t.c.i.c.executor.ImportExecutor      : Package Status: approvals-app - f5ace1f8-7a66-4c70-b5e6-4f14830ff186 - PROVISIONED
+2020-04-20 13:34:35.750  INFO 9392 --- [onPool-worker-1] c.b.t.c.i.c.executor.ImportExecutor      : 	Processed 4 items
+2020-04-20 13:34:35.750  INFO 9392 --- [           main] c.b.tools.cx.imex.ImExCommandExecutor    : Terminating with status: SUCCESS
+]
