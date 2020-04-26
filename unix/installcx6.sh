@@ -292,19 +292,19 @@ function fn_check_health {
 
     echo "=========================== Checking $ENDPOINT availability ==========================="
 
-    while ([ "$RESPONSE" != '{"status":"UP"}' ] && [ "$TRY_COUNTER" -lt 50 ])
+    while ([ "$RESPONSE" != '200' ] && [ "$TRY_COUNTER" -lt 50 ])
     do
         echo "Ping localhost:8080/gateway/api/$ENDPOINT .... try $TRY_COUNTER"
-        RESPONSE=$(curl -s -S --max-time 3 --connect-timeout 3 "localhost:8080/gateway/api/$ENDPOINT")
+        RESPONSE=$(curl -s -o /dev/null -I -w "%{http_code}" --max-time 3 --connect-timeout 3 "localhost:8080/gateway/api/$ENDPOINT")
         echo "$RESPONSE"
         let "TRY_COUNTER=TRY_COUNTER+1"
 
-        if [ "$RESPONSE" != '{"status":"UP"}' ]; then
-            sleep 10
+        if [ "$RESPONSE" != '200' ]; then
+            sleep 30
         fi
     done
 
-    if [ "$RESPONSE" != '{"status":"UP"}' ]; then
+    if [ "$RESPONSE" != '200' ]; then
         echo "localhost:8080/gateway/api/$ENDPOINT is not ready after $TRY_COUNTER tries"
         exit 1
     fi
