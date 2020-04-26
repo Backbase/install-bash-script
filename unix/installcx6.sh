@@ -1,9 +1,9 @@
-#!/bin/bash -eu
+#!/usr/bin/env bash
 
 function setConstants {
 
   export PATH=$PATH:/usr/local/mysql/bin
-  export BACK_HOME="/tmp/opt/backbase"
+  export BACKBASE_HOME="/tmp/opt/backbase"
 
   IPS_VERSION=1.11.8
   IPS_URL=https://repo.backbase.com/backbase-6-release/com/backbase/platform-bom/${IPS_VERSION}/platform-bom-${IPS_VERSION}.zip
@@ -22,9 +22,9 @@ function setConstants {
 
   ACTIVEMQ_VERSION=5.15.12
   ACTIVEMQ_FILENAME=apache-activemq-${ACTIVEMQ_VERSION}-bin.tar.gz
-  ACTIVEMQ_URL=http://archive.apache.org/dist/activemq/${ACTIVEMQ_VERSION}/${ACTIVEMQ_FILENAME}
+  ACTIVEMQ_URL=https://archive.apache.org/dist/activemq/${ACTIVEMQ_VERSION}/${ACTIVEMQ_FILENAME}
 
-  CX6_HOME=${BACK_HOME}
+  CX6_HOME=${BACKBASE_HOME}
 
   CX6_FS_HOME=${CX6_HOME}/filesystem
 
@@ -49,9 +49,6 @@ function setConstants {
 }
 
 function initMysql {
-  #mysqld --help --verbose
-  #mysql --defaults-extra-file=../common/mysql-configs/mysqlsecret < ../common/mysql-configs/install-cx6.sql
-  echo "Enter mysql ROOT user password when prompted."
   mysql -u root -pbackbase < ../common/mysql-configs/cx6_schemas.sql
 }
 
@@ -61,22 +58,22 @@ function downloadAll {
     wget -Nt 1 ${ACTIVEMQ_URL}
     echo "Downloading Tomcat"
     wget -Nt 1 ${TOMCAT_URL}
-    echo "Installing Base Tomcat libraries (geronimo, mysql)"
+    echo "Downloading additional Tomcat libraries (geronimo, mysql)"
     wget -Nt 1 https://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.44/mysql-connector-java-5.1.44.jar
     wget -Nt 1 https://repo1.maven.org/maven2/org/apache/geronimo/specs/geronimo-jms_1.1_spec/1.1.1/geronimo-jms_1.1_spec-1.1.1.jar
 
-      read -p "Artifactory Username:" AR_USERNAME
-      read -s -p "Artifactory Password:" AR_PASSWORD
+    read -p "repo.backbase.com username: " AR_USERNAME
+    read -s -p "repo.backbase.com password: " AR_PASSWORD
 
     echo "Downloading CX6 BOM File"
     mvn org.apache.maven.plugins:maven-dependency-plugin:get -Dpackaging=pom -DrepoUrl=https://repo.backbase.com -Dartifact=com.backbase.cxp:cx-bom:${CX6_VERSION} -Ddest=.
     echo "Downloading IPS BOM File"
     mvn org.apache.maven.plugins:maven-dependency-plugin:get -Dpackaging=pom -DrepoUrl=https://repo.backbase.com -Dartifact=com.backbase:platform-bom:${IPS_VERSION} -Ddest=.
-    echo "Downloading IPS War Files"
+    echo "Downloading IPS WAR files"
     mvn -f platform-bom-${IPS_VERSION}.pom package -DoutputDirectory=. -DexcludeTransitive=true
-    echo "Downloading CX6 War Files"
+    echo "Downloading CX6 WAR files"
     mvn dependency:copy-dependencies -P war-files -Dmdep.stripVersion=true -DoutputDirectory=. -DexcludeTransitive=true -f cx-bom-${CX6_VERSION}.pom
-    echo "Downloading CX6 SQL Files"
+    echo "Downloading CX6 SQL files"
     mvn dependency:copy-dependencies -P sql-scripts -Dmdep.stripVersion=true -DoutputDirectory=./sqlscripts -Dclassifier=sql -DexcludeTransitive=true -f cx-bom-${CX6_VERSION}.pom
     echo "Downloading CX6 Experience Manager"
     mvn dependency:copy-dependencies -P experience-manager -Dmdep.stripVersion=true -DoutputDirectory=. -DexcludeTransitive=true -f cx-bom-${CX6_VERSION}.pom
@@ -89,13 +86,13 @@ function downloadAll {
     wget -N --http-user=${AR_USERNAME} --http-password=${AR_PASSWORD} ${WEB_SDK_URL}
     echo "Downloading Importer Jar Tool"
     mvn dependency:copy-dependencies -P tools  -Dmdep.stripVersion=true -DoutputDirectory=. -DexcludeTransitive=true -f cx-bom-${CX6_VERSION}.pom
-    echo "Downloading Demo Auth service"
+    echo "Downloading Authentication Dev Service"
     wget -N --http-user=${AR_USERNAME} --http-password=${AR_PASSWORD} ${AUTH}
     popd
 }
 
 function buildCXFileSystemDir {
-  echo "Building CX Filesystem Directory Structure in ${CX6_HOME}"
+  echo "Building CX filesystem directory structure in ${CX6_HOME}"
   mkdir -p ${CX6_CONFIGS_HOME}
   cp -R ../common/service-configs/* ${CX6_CONFIGS_HOME}
 
@@ -104,7 +101,7 @@ function buildCXFileSystemDir {
   mkdir -p ${CX6_FS_HOME}/publishing/{exports,imports}
   chmod -R 777 ${CX6_FS_HOME}/
 
-  echo "Building CX Tomcat Directory Structure"
+  echo "Building CX Tomcat directory structure"
   mkdir -p ${CX6_TOMCAT_BASE}
   mkdir -p ${CX6_TOMCAT_PLATFORM}
   mkdir -p ${CX6_TOMCAT_EDITORIAL}
@@ -112,7 +109,7 @@ function buildCXFileSystemDir {
   mkdir -p ${CX6_SSL_CERTS}
   chmod -R 775 ${CX6_TOMCAT}
 
-  echo "Building ActiveMQ Directory Structure"
+  echo "Building ActiveMQ directory structure"
   mkdir -p ${CX6_ACTIVEMQ}
 
   chown -R $USER ${CX6_HOME}/
@@ -120,7 +117,6 @@ function buildCXFileSystemDir {
   cp ./startcx6.sh ${CX6_HOME}/
   cp ./stopcx6.sh ${CX6_HOME}/
   chmod +x ${CX6_HOME}/*.sh
-
 }
 
 function importCertificate {
@@ -128,7 +124,7 @@ function importCertificate {
 }
 
 function configTomcatInstances {
-  echo "Configuring CX6 Tomcat Instances"
+  echo "Configuring CX6 Tomcat instances"
   cp -Rf ../common/tomcat-structure/* ${CX6_TOMCAT_EDITORIAL}
   cp -Rf ../common/tomcat-structure/* ${CX6_TOMCAT_PLATFORM}
   cp -Rf ../common/tomcat-structure/* ${CX6_TOMCAT_PORTAL}
@@ -137,7 +133,6 @@ function configTomcatInstances {
   cp -Rf ../common/tomcat-configs/editorial/* ${CX6_TOMCAT_EDITORIAL}
   cp -Rf ../common/tomcat-configs/platform/* ${CX6_TOMCAT_PLATFORM}
   cp -Rf ../common/tomcat-configs/portal/* ${CX6_TOMCAT_PORTAL}
-
 }
 
 function installAndConfigLocalActiveMQ {
@@ -155,7 +150,7 @@ function installAndConfigLocalActiveMQ {
 }
 
 function installAndConfigLocalTomcat {
-  echo "Installing Base Tomcat version v${TOMCAT_VERSION}"
+  echo "Installing base Tomcat version v${TOMCAT_VERSION}"
   TEMP_DIR=$(mktemp -d)
   echo "Copying local Tomcat"
   cp -f ../local-install/${TOMCAT_FILENAME} ${TEMP_DIR}
@@ -166,7 +161,7 @@ function installAndConfigLocalTomcat {
   tar -xzf ${TOMCAT_FILENAME}
   cp -Rf apache-tomcat-${TOMCAT_VERSION}/* ${CX6_TOMCAT_BASE}
 
-  echo "Installing Base Tomcat libraries (geronimo, mysql)"
+  echo "Installing additional Tomcat libraries (geronimo, mysql)"
   cp -f mysql-connector-java-5.1.44.jar ${CX6_TOMCAT_BASE}/lib
   cp -f geronimo-jms_1.1_spec-1.1.1.jar ${CX6_TOMCAT_BASE}/lib
   popd
@@ -186,20 +181,20 @@ function installLocalCx6 {
   mkdir db-scripts
   unzip \*.zip -d db-scripts
 
-  echo "Copying Editorial Wars"
+  echo "Copying Editorial WARs"
   cp auditing.war ${CX6_TOMCAT_EDITORIAL}/webapps
   cp renditionservice.war ${CX6_TOMCAT_EDITORIAL}/webapps
   cp targeting.war ${CX6_TOMCAT_EDITORIAL}/webapps
   cp thumbnailservice.war ${CX6_TOMCAT_EDITORIAL}/webapps
   cp space-controller-service.war ${CX6_TOMCAT_EDITORIAL}/webapps
 
-  echo "Copying IPS Wars"
+  echo "Copying IPS WARs"
   cp authentication-dev-1.4.0.war ${CX6_TOMCAT_PLATFORM}/webapps/authentication.war
   cp gateway.war ${CX6_TOMCAT_PLATFORM}/webapps/gateway.war
   cp registry.war ${CX6_TOMCAT_PLATFORM}/webapps
   cp token-converter.war ${CX6_TOMCAT_PLATFORM}/webapps
 
-  echo "Copying Portal Wars"
+  echo "Copying Portal WARs"
   cp contentservices.war ${CX6_TOMCAT_PORTAL}/webapps
   cp portal.war ${CX6_TOMCAT_PORTAL}/webapps
   cp provisioning.war ${CX6_TOMCAT_PORTAL}/webapps
@@ -219,10 +214,7 @@ function createDatabases {
   mysql -u root -pbackbase rendition_e< db-scripts/renditionservice/mysql/create/renditionservice.sql
   mysql -u root -pbackbase tar_e < db-scripts/targeting/mysql/create/targeting.sql
   mysql -u root -pbackbase spacecontroller_e < db-scripts/space-controller/mysql/create/space-controller.sql
-#  mysql -u root -pbackbase mobile_e < db-scripts/versionmanagement-persistence-service/mysql/create/versionmanagement-persistence-service.sql
-#  mysql -u root -pbackbase mobile_e < db-scripts/push-integration-service/mysql/create/push-integration-service.sql
 }
-
 
 function startActiveMQ {
   echo "Starting ActiveMQ"
@@ -245,7 +237,6 @@ function startPortal {
   echo "  JDWP : 8021"
   echo "   JMX : 8051"
   bash ${CX6_TOMCAT_PORTAL}/startup.sh
-  sleep 30
 }
 
 function startEditorial {
@@ -254,14 +245,15 @@ function startEditorial {
   echo "  JDWP : 8022"
   echo "   JMX : 8052"
   bash ${CX6_TOMCAT_EDITORIAL}/startup.sh
-  sleep 30
 }
 
 function startAllCX6 {
   startActiveMQ
   startPlatform
   startPortal
+  sleep 30
   startEditorial
+  sleep 30
 }
 
 function provisionCX6ExpMgr {
@@ -276,16 +268,16 @@ function provisionCX6ExpMgr {
   pushd ${TEMP_DIR}
 
   echo "Provision Editorial Collection"
-  # Provision a collection
+  # Provision Editorial Collection
   java -jar cx6-import-tool-cli.jar --import editorial-collection.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
   echo "Provision Web SDK"
   # Provision web-sdk
   java -jar cx6-import-tool-cli.jar --import collection-bb-web-sdk-${WEB_SDK_VERSION}.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
-  # Import an experience
+  # Import the Experience Manager
   echo "Provision Experience Manager"
   java -jar cx6-import-tool-cli.jar --import experience-manager.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
-    # Import an experience
-  echo "Provision Approvals"
+  # Provision Approvals Collection and its portal
+  echo "Provision Approvals (collection and portal)"
   java -jar cx6-import-tool-cli.jar --import collection-approvals-0.0.17-page.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
   java -jar cx6-import-tool-cli.jar --import collection-approvals-0.0.17-portal.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
 
@@ -294,7 +286,7 @@ function provisionCX6ExpMgr {
 }
 
 function fn_check_health {
-    local ENDPOINT=${1:portal}
+    local ENDPOINT=$1
     local TRY_COUNTER=0
     local RESPONSE=
 
@@ -333,5 +325,3 @@ fn_check_health "portal/actuator/health/liveness"
 fn_check_health "contentservices/actuator/health/liveness"
 fn_check_health "provisioning/actuator/health/liveness"
 provisionCX6ExpMgr
-
-
