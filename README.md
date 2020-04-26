@@ -82,6 +82,7 @@ All the configurations needed for the different components (ActiveMQ, MySQL, Tom
 
 ## Running the script
 
+    cd unix
     sh installcx6.sh
     
 All the steps happen automatically, just wait for the script to finish.
