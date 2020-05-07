@@ -12,7 +12,8 @@ function setConstants {
 
   CX6_VERSION=6.2.3.1
 
-  WEB_SDK_VERSION=1.10.0
+  WEB_SDK_VERSION=1.11.0
+  APPROVAL_VERSION=1.1.1
   WEB_SDK_URL=https://repo.backbase.com/expert-release-local/com/backbase/web-sdk/collection/collection-bb-web-sdk/${WEB_SDK_VERSION}/collection-bb-web-sdk-${WEB_SDK_VERSION}.zip
   IMPORTER_JAR_URL=https://repo.backbase.com/backbase-6-release/com/backbase/tools/cx/cx6-import-tool-cli/${CX6_VERSION}/cx6-import-tool-cli-${CX6_VERSION}.jar
 
@@ -80,8 +81,8 @@ function downloadAll {
     echo "Downloading CX6 Editorial Collection"
     mvn dependency:copy-dependencies -P editorial-collection  -Dmdep.stripVersion=true -DoutputDirectory=. -DexcludeTransitive=true -f cx-bom-${CX6_VERSION}.pom
     echo "Downloading Approvals"
-    mvn dependency:get -Dartifact=com.backbase.cxp:collection-approvals:0.0.17:zip:portal -Ddest=.
-    mvn dependency:get -Dartifact=com.backbase.cxp:collection-approvals:0.0.17:zip:page -Ddest=.
+    mvn dependency:get -Dartifact=com.backbase.cxp:collection-approvals:${APPROVAL_VERSION}:zip:portal -Ddest=.
+    mvn dependency:get -Dartifact=com.backbase.cxp:collection-approvals:${APPROVAL_VERSION}:zip:page -Ddest=.
     echo "Downloading Web SDK"
     wget -N --http-user=${AR_USERNAME} --http-password=${AR_PASSWORD} ${WEB_SDK_URL}
     echo "Downloading Importer Jar Tool"
@@ -278,8 +279,8 @@ function provisionCX6ExpMgr {
   java -jar cx6-import-tool-cli.jar --import experience-manager.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
   # Provision Approvals Collection and its portal
   echo "Provision Approvals (collection and portal)"
-  java -jar cx6-import-tool-cli.jar --import collection-approvals-0.0.17-page.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
-  java -jar cx6-import-tool-cli.jar --import collection-approvals-0.0.17-portal.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
+  java -jar cx6-import-tool-cli.jar --import collection-approvals-${APPROVAL_VERSION}-page.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
+  java -jar cx6-import-tool-cli.jar --import collection-approvals-${APPROVAL_VERSION}-portal.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
 
   popd
   rm -rf ${TEMP_DIR}
