@@ -10,7 +10,7 @@ function setConstants {
   AUTH_VERSION=1.4.0
   AUTH=https://repo.backbase.com/backbase-6-release/com/backbase/infra/authentication-dev/${AUTH_VERSION}/authentication-dev-${AUTH_VERSION}.war
 
-  CX6_VERSION=6.2.3.1
+  CX6_VERSION=6.2.4
 
   WEB_SDK_VERSION=1.11.0
   APPROVAL_VERSION=1.1.1
