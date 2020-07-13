@@ -241,8 +241,7 @@ function startActiveMQ {
 
 function startEdge {
   echo "Starting Edge"
-  echo "  TCP : 7777"
-  # echo "  SSL : 61617"
+  echo "  HTTP : 7777"
   bash run.sh ${EDGE} &
 }
 
