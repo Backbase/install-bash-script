@@ -43,7 +43,7 @@ The steps followed in the script are:
 4. [MySQL](https://www.mysql.com/downloads/) 5.6 or 5.7 running (`root` password must be `backbase`). Make sure you copy the needed configuration (an example [here](common/mysql-configs/my.cnf)).
     ```
     sudo mkdir -p /usr/local/mysql/etc/
-    sudo cp ../common/mysql-configs/my.cnf /usr/local/mysql/etc/
+    sudo cp ./common/mysql-configs/my.cnf /usr/local/mysql/etc/
     ```
 
 5. Make sure you have [wget](https://www.gnu.org/software/wget/) installed:
@@ -62,7 +62,7 @@ The steps followed in the script are:
     ```
     yum install wget
     ```
-5. The following ports must be free
+6. The following ports must be free
    * 61616 (will be used by ActiveMQ)
    * 8080/8443 (will be used by IPS Tomcat)
    * 8081 (will be used by CX6 Portal Tomcat)
@@ -93,12 +93,13 @@ When the scripts has finished running, CX Manager should be available here on ht
 
 
 ## Common problems
-* Do not try to run the script using MySQL 8.x. Make sure that you are using MySQL 5.6/5.7. When istalling MySQL through `brew` on MacOS, make sure for example to pin a specific version
+* Do not try to run the script using MySQL 8.x. Make sure that you are using MySQL 5.6/5.7. When installing MySQL through `brew` on MacOS, make sure for example to pin a specific version
     ```
     brew install mysql@5.7
     ```
 * If the configuration for the database is not applied, the `max-allowed-packet` will be small, therefore the import of some big collections will fail (the error will be visible in the log files of the Portal Tomcat instance).
 * Make sure you sare not setting `JAVA_OPTS` that may be in conflict with what is set in the `startup.sh` scripts inside the `tomcat-configs` sub-directories. An example could be some conflicting collector combinations that will prevent the JVM from starting.
+* If `wget` fails to check the certificates on the HTTPS resources that are required to be downloaded, you can override the certificate file (e.g. if `openssl` was also installed via `homebrew`, in the `wgetrc` file you can set `ca-certificate=/usr/local/etc/openssl/cert.pem`). Refer to `wget` documentation for more details.
 * Running the script by using `./installCX6.sh` instead of the more explicit `sh installCX6.sh` may lead to weird behaviours of the `curl` statements (the first attempts to check if a service is alive are expected to fail and this may break the script if not run using `sh installCX6.sh`). 
 * The certificate which is included to expose the Edge Service in HTTPS is self-signed (for practical reasons), therefore the browsers will complain. If the browser allows this, you can set an exception and safely ignore the error.
 
