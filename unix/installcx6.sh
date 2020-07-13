@@ -205,7 +205,7 @@ function installLocalCx6 {
   cp space-controller-service.war ${CX6_TOMCAT_EDITORIAL}/webapps
 
   echo "Copying IPS WARs"
-  cp authentication-dev-1.4.0.war ${CX6_TOMCAT_PLATFORM}/webapps/authentication.war
+  cp authentication-dev-1.4.0.war ${CX6_TOMCAT_PLATFORM}/webapps/auth.war
   # cp gateway.war ${CX6_TOMCAT_PLATFORM}/webapps/gateway.war
   cp registry.war ${CX6_TOMCAT_PLATFORM}/webapps
   cp token-converter.war ${CX6_TOMCAT_PLATFORM}/webapps
