@@ -89,7 +89,7 @@ All the steps happen automatically, just wait for the script to finish.
 
 The progress can be monitored on http://localhost:8080/registry/
 
-When the scripts has finished running, CX Manager should be available here on http://localhost:8080/gateway/api/cxp-manager/login
+When the scripts has finished running, CX Manager should be available here on http://localhost:7777/api/cxp-manager/login
 
 
 ## Common problems

@@ -1,8 +1,0 @@
-<Context useHttpOnly="false">
-
-    <Environment name="spring.config.location"
-                 value="/tmp/opt/backbase/service-configs/gateway/application.yml"
-                 type="java.lang.String"
-                 override="false"/>
-
-</Context>

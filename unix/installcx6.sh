@@ -5,15 +5,15 @@ function setConstants {
   export PATH=$PATH:/usr/local/mysql/bin
   export BACKBASE_HOME="/tmp/opt/backbase"
 
-  IPS_VERSION=1.11.8
+  IPS_VERSION=1.12.0
   IPS_URL=https://repo.backbase.com/backbase-6-release/com/backbase/platform-bom/${IPS_VERSION}/platform-bom-${IPS_VERSION}.zip
-  AUTH_VERSION=1.4.0
+  AUTH_VERSION=1.8.0
   AUTH=https://repo.backbase.com/backbase-6-release/com/backbase/infra/authentication-dev/${AUTH_VERSION}/authentication-dev-${AUTH_VERSION}.war
 
-  CX6_VERSION=6.2.3.1
+  CX6_VERSION=6.2.5.2
 
-  WEB_SDK_VERSION=1.11.0
-  APPROVAL_VERSION=1.1.1
+  WEB_SDK_VERSION=1.12.0
+  APPROVAL_VERSION=1.3.0
   WEB_SDK_URL=https://repo.backbase.com/expert-release-local/com/backbase/web-sdk/collection/collection-bb-web-sdk/${WEB_SDK_VERSION}/collection-bb-web-sdk-${WEB_SDK_VERSION}.zip
   IMPORTER_JAR_URL=https://repo.backbase.com/backbase-6-release/com/backbase/tools/cx/cx6-import-tool-cli/${CX6_VERSION}/cx6-import-tool-cli-${CX6_VERSION}.jar
 
@@ -33,6 +33,7 @@ function setConstants {
 
   CX6_TOMCAT=${CX6_HOME}/runtimes/tomcat
   CX6_ACTIVEMQ=${CX6_HOME}/runtimes/activemq
+  EDGE=${CX6_HOME}/runtimes/edge
 
   CX6_TOMCAT_BASE=${CX6_TOMCAT}/${TOMCAT_VERSION}
   CX6_TOMCAT_PLATFORM=${CX6_TOMCAT}/platform
@@ -113,6 +114,9 @@ function buildCXFileSystemDir {
   echo "Building ActiveMQ directory structure"
   mkdir -p ${CX6_ACTIVEMQ}
 
+  echo "Building Edge directory structure"
+  mkdir -p ${EDGE}
+
   chown -R $USER ${CX6_HOME}/
 
   cp ./startcx6.sh ${CX6_HOME}/
@@ -148,6 +152,17 @@ function installAndConfigLocalActiveMQ {
   rm -rf ${TEMP_DIR}
 
   cp ../common/activemq-configs/activemq.xml ${CX6_ACTIVEMQ}/conf
+}
+
+function installAndConfigLocalEdge {
+  echo "Installing Edge version"
+  TEMP_DIR=$(mktemp -d)
+  echo "Copying local Edge jar"
+  cp -f ../local-install/edge.jar ${TEMP_DIR}
+  pushd ${TEMP_DIR}
+  cp -Rf edge.jar ${EDGE}
+  popd
+  rm -rf ${TEMP_DIR}
 }
 
 function installAndConfigLocalTomcat {
@@ -191,7 +206,7 @@ function installLocalCx6 {
 
   echo "Copying IPS WARs"
   cp authentication-dev-1.4.0.war ${CX6_TOMCAT_PLATFORM}/webapps/authentication.war
-  cp gateway.war ${CX6_TOMCAT_PLATFORM}/webapps/gateway.war
+  # cp gateway.war ${CX6_TOMCAT_PLATFORM}/webapps/gateway.war
   cp registry.war ${CX6_TOMCAT_PLATFORM}/webapps
   cp token-converter.war ${CX6_TOMCAT_PLATFORM}/webapps
 
@@ -224,6 +239,13 @@ function startActiveMQ {
   bash ${CX6_ACTIVEMQ}/bin/activemq start
 }
 
+function startEdge {
+  echo "Starting Edge"
+  echo "  TCP : 7777"
+  # echo "  SSL : 61617"
+  bash run.sh ${EDGE} &
+}
+
 function startPlatform {
   echo "Starting CX6 IPS Tomcat"
   echo "  HTTP : 8080"
@@ -250,6 +272,7 @@ function startEditorial {
 
 function startAllCX6 {
   startActiveMQ
+  startEdge
   startPlatform
   startPortal
   sleep 30
@@ -264,23 +287,23 @@ function provisionCX6ExpMgr {
   cp ../local-install/experience-manager.zip ${TEMP_DIR}
   cp ../local-install/collection-bb-web-sdk-${WEB_SDK_VERSION}.zip ${TEMP_DIR}
   cp ../local-install/cx6-import-tool-cli.jar ${TEMP_DIR}
-  cp ../local-install/collection-approvals-0.0.17-portal.zip ${TEMP_DIR}
-  cp ../local-install/collection-approvals-0.0.17-page.zip ${TEMP_DIR}
+  cp ../local-install/collection-approvals-${APPROVAL_VERSION}-portal.zip ${TEMP_DIR}
+  cp ../local-install/collection-approvals-${APPROVAL_VERSION}-page.zip ${TEMP_DIR}
   pushd ${TEMP_DIR}
 
   echo "Provision Editorial Collection"
   # Provision Editorial Collection
-  java -jar cx6-import-tool-cli.jar --import editorial-collection.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
+  java -jar cx6-import-tool-cli.jar --import editorial-collection.zip --username admin --password admin --target-ctx http://localhost:7777/api/provisioning --auth-url=http://localhost:7777/api/auth/login
   echo "Provision Web SDK"
   # Provision web-sdk
-  java -jar cx6-import-tool-cli.jar --import collection-bb-web-sdk-${WEB_SDK_VERSION}.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
+  java -jar cx6-import-tool-cli.jar --import collection-bb-web-sdk-${WEB_SDK_VERSION}.zip --username admin --password admin --target-ctx http://localhost:7777/api/provisioning --auth-url=http://localhost:7777/api/auth/login
   # Import the Experience Manager
   echo "Provision Experience Manager"
-  java -jar cx6-import-tool-cli.jar --import experience-manager.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
+  java -jar cx6-import-tool-cli.jar --import experience-manager.zip --username admin --password admin --target-ctx http://localhost:7777/api/provisioning --auth-url=http://localhost:7777/api/auth/login
   # Provision Approvals Collection and its portal
   echo "Provision Approvals (collection and portal)"
-  java -jar cx6-import-tool-cli.jar --import collection-approvals-${APPROVAL_VERSION}-page.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
-  java -jar cx6-import-tool-cli.jar --import collection-approvals-${APPROVAL_VERSION}-portal.zip --username admin --password admin --target-ctx http://localhost:8080/gateway/api/provisioning --auth-url=http://localhost:8080/gateway/api/auth/login
+  java -jar cx6-import-tool-cli.jar --import collection-approvals-${APPROVAL_VERSION}-page.zip --username admin --password admin --target-ctx http://localhost:7777/api/provisioning --auth-url=http://localhost:7777/api/auth/login
+  java -jar cx6-import-tool-cli.jar --import collection-approvals-${APPROVAL_VERSION}-portal.zip --username admin --password admin --target-ctx http://localhost:7777/api/provisioning --auth-url=http://localhost:7777/api/auth/login
 
   popd
   rm -rf ${TEMP_DIR}
@@ -295,8 +318,8 @@ function fn_check_health {
 
     while ([ "$RESPONSE" != '200' ] && [ "$TRY_COUNTER" -lt 50 ])
     do
-        echo "Ping localhost:8080/gateway/api/$ENDPOINT .... try $TRY_COUNTER"
-        RESPONSE=$(curl -s -o /dev/null -I -w "%{http_code}" --max-time 3 --connect-timeout 3 "localhost:8080/gateway/api/$ENDPOINT")
+        echo "Ping localhost:7777/api/$ENDPOINT .... try $TRY_COUNTER"
+        RESPONSE=$(curl -s -o /dev/null -I -w "%{http_code}" --max-time 3 --connect-timeout 3 "localhost:7777/api/$ENDPOINT")
         echo "$RESPONSE"
         let "TRY_COUNTER=TRY_COUNTER+1"
 
@@ -306,7 +329,7 @@ function fn_check_health {
     done
 
     if [ "$RESPONSE" != '200' ]; then
-        echo "localhost:8080/gateway/api/$ENDPOINT is not ready after $TRY_COUNTER tries"
+        echo "localhost:7777/api/$ENDPOINT is not ready after $TRY_COUNTER tries"
         exit 1
     fi
 }
@@ -318,6 +341,7 @@ importCertificate
 configTomcatInstances
 downloadAll
 installAndConfigLocalActiveMQ
+installAndConfigLocalEdge
 installAndConfigLocalTomcat
 installLocalCx6
 startAllCX6
